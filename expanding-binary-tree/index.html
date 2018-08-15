@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  /* set the CSS */
+
+  .link {
+    fill: none;
+    stroke: #330;
+    stroke-width: 2px;
+  }
+</style>
+
+<body>
+
+  <!-- load the d3.js library -->
+  <script src="//d3js.org/d3.v4.min.js"></script>
+  <script>
+
+    var data = [
+      { "parent": "", "name": "-1" },
+      { "parent": "-1", "name": "0" },
+      { "parent": "0", "name": "1" },
+      { "parent": "0", "name": "2" },
+      { "parent": "1", "name": "3" },
+      { "parent": "1", "name": "4" },
+      { "parent": "2", "name": "5" },
+      { "parent": "2", "name": "6" },
+      { "parent": "3", "name": "7" },
+      { "parent": "3", "name": "8" },
+      { "parent": "4", "name": "9" },
+      { "parent": "4", "name": "10" },
+      { "parent": "5", "name": "11" },
+      { "parent": "5", "name": "12" },
+      { "parent": "6", "name": "13" },
+      { "parent": "6", "name": "14" },
+      { "parent": "7", "name": "15" },
+      { "parent": "7", "name": "16" },
+      { "parent": "8", "name": "17" },
+      { "parent": "8", "name": "18" },
+      { "parent": "9", "name": "19" },
+      { "parent": "9", "name": "20" },
+      { "parent": "10", "name": "21" },
+      { "parent": "10", "name": "22" },
+      { "parent": "11", "name": "23" },
+      { "parent": "11", "name": "24" },
+      { "parent": "12", "name": "25" },
+      { "parent": "12", "name": "26" },
+      { "parent": "13", "name": "27" },
+      { "parent": "13", "name": "28" },
+      { "parent": "14", "name": "29" },
+      { "parent": "14", "name": "30" },
+      { "parent": "15", "name": "31" },
+      { "parent": "15", "name": "32" },
+      { "parent": "16", "name": "33" },
+      { "parent": "16", "name": "34" },
+      { "parent": "17", "name": "35" },
+      { "parent": "17", "name": "36" },
+      { "parent": "18", "name": "37" },
+      { "parent": "18", "name": "38" },
+      { "parent": "19", "name": "39" },
+      { "parent": "19", "name": "40" },
+      { "parent": "20", "name": "41" },
+      { "parent": "20", "name": "42" },
+      { "parent": "21", "name": "43" },
+      { "parent": "21", "name": "44" },
+      { "parent": "22", "name": "45" },
+      { "parent": "22", "name": "46" },
+      { "parent": "23", "name": "47" },
+      { "parent": "23", "name": "48" },
+      { "parent": "24", "name": "49" },
+      { "parent": "24", "name": "50" },
+      { "parent": "25", "name": "51" },
+      { "parent": "25", "name": "52" },
+      { "parent": "26", "name": "53" },
+      { "parent": "26", "name": "54" },
+      { "parent": "27", "name": "55" },
+      { "parent": "27", "name": "56" },
+      { "parent": "28", "name": "57" },
+      { "parent": "28", "name": "58" },
+      { "parent": "29", "name": "59" },
+      { "parent": "29", "name": "60" },
+      { "parent": "30", "name": "61" },
+      { "parent": "30", "name": "62" },
+      { "parent": "31", "name": "63" },
+      { "parent": "31", "name": "64" },
+      { "parent": "32", "name": "65" },
+      { "parent": "32", "name": "66" },
+      { "parent": "33", "name": "67" },
+      { "parent": "33", "name": "68" },
+      { "parent": "34", "name": "69" },
+      { "parent": "34", "name": "70" },
+      { "parent": "35", "name": "71" },
+      { "parent": "35", "name": "72" },
+      { "parent": "36", "name": "73" },
+      { "parent": "36", "name": "74" },
+      { "parent": "37", "name": "75" },
+      { "parent": "37", "name": "76" },
+      { "parent": "38", "name": "77" },
+      { "parent": "38", "name": "78" },
+      { "parent": "39", "name": "79" },
+      { "parent": "39", "name": "80" },
+      { "parent": "40", "name": "81" },
+      { "parent": "40", "name": "82" },
+      { "parent": "41", "name": "83" },
+      { "parent": "41", "name": "84" },
+      { "parent": "42", "name": "85" },
+      { "parent": "42", "name": "86" },
+      { "parent": "43", "name": "87" },
+      { "parent": "43", "name": "88" },
+      { "parent": "44", "name": "89" },
+      { "parent": "44", "name": "90" },
+      { "parent": "45", "name": "91" },
+      { "parent": "45", "name": "92" },
+      { "parent": "46", "name": "93" },
+      { "parent": "46", "name": "94" },
+      { "parent": "47", "name": "95" },
+      { "parent": "47", "name": "96" },
+      { "parent": "48", "name": "97" },
+      { "parent": "48", "name": "98" },
+      { "parent": "49", "name": "99" },
+      { "parent": "49", "name": "100" },
+      { "parent": "50", "name": "101" },
+      { "parent": "50", "name": "102" },
+      { "parent": "51", "name": "103" },
+      { "parent": "51", "name": "104" },
+      { "parent": "52", "name": "105" },
+      { "parent": "52", "name": "106" },
+      { "parent": "53", "name": "107" },
+      { "parent": "53", "name": "108" },
+      { "parent": "54", "name": "109" },
+      { "parent": "54", "name": "110" },
+      { "parent": "55", "name": "111" },
+      { "parent": "55", "name": "112" },
+      { "parent": "56", "name": "113" },
+      { "parent": "56", "name": "114" },
+      { "parent": "57", "name": "115" },
+      { "parent": "57", "name": "116" },
+      { "parent": "58", "name": "117" },
+      { "parent": "58", "name": "118" },
+      { "parent": "59", "name": "119" },
+      { "parent": "59", "name": "120" },
+      { "parent": "60", "name": "121" },
+      { "parent": "60", "name": "122" },
+      { "parent": "61", "name": "123" },
+      { "parent": "61", "name": "124" },
+      { "parent": "62", "name": "125" },
+      { "parent": "62", "name": "126" },
+      { "parent": "63", "name": "127" },
+      { "parent": "63", "name": "128" },
+      { "parent": "64", "name": "129" },
+      { "parent": "64", "name": "130" },
+      { "parent": "65", "name": "131" },
+      { "parent": "65", "name": "132" },
+      { "parent": "66", "name": "133" },
+      { "parent": "66", "name": "134" },
+      { "parent": "67", "name": "135" },
+      { "parent": "67", "name": "136" },
+      { "parent": "68", "name": "137" },
+      { "parent": "68", "name": "138" },
+      { "parent": "69", "name": "139" },
+      { "parent": "69", "name": "140" },
+      { "parent": "70", "name": "141" },
+      { "parent": "70", "name": "142" },
+      { "parent": "71", "name": "143" },
+      { "parent": "71", "name": "144" },
+      { "parent": "72", "name": "145" },
+      { "parent": "72", "name": "146" },
+      { "parent": "73", "name": "147" },
+      { "parent": "73", "name": "148" },
+      { "parent": "74", "name": "149" },
+      { "parent": "74", "name": "150" },
+      { "parent": "75", "name": "151" },
+      { "parent": "75", "name": "152" },
+      { "parent": "76", "name": "153" },
+      { "parent": "76", "name": "154" },
+      { "parent": "77", "name": "155" },
+      { "parent": "77", "name": "156" },
+      { "parent": "78", "name": "157" },
+      { "parent": "78", "name": "158" },
+      { "parent": "79", "name": "159" },
+      { "parent": "79", "name": "160" },
+      { "parent": "80", "name": "161" },
+      { "parent": "80", "name": "162" },
+      { "parent": "81", "name": "163" },
+      { "parent": "81", "name": "164" },
+      { "parent": "82", "name": "165" },
+      { "parent": "82", "name": "166" },
+      { "parent": "83", "name": "167" },
+      { "parent": "83", "name": "168" },
+      { "parent": "84", "name": "169" },
+      { "parent": "84", "name": "170" },
+      { "parent": "85", "name": "171" },
+      { "parent": "85", "name": "172" },
+      { "parent": "86", "name": "173" },
+      { "parent": "86", "name": "174" },
+      { "parent": "87", "name": "175" },
+      { "parent": "87", "name": "176" },
+      { "parent": "88", "name": "177" },
+      { "parent": "88", "name": "178" },
+      { "parent": "89", "name": "179" },
+      { "parent": "89", "name": "180" },
+      { "parent": "90", "name": "181" },
+      { "parent": "90", "name": "182" },
+      { "parent": "91", "name": "183" },
+      { "parent": "91", "name": "184" },
+      { "parent": "92", "name": "185" },
+      { "parent": "92", "name": "186" },
+      { "parent": "93", "name": "187" },
+      { "parent": "93", "name": "188" },
+      { "parent": "94", "name": "189" },
+      { "parent": "94", "name": "190" },
+      { "parent": "95", "name": "191" },
+      { "parent": "95", "name": "192" },
+      { "parent": "96", "name": "193" },
+      { "parent": "96", "name": "194" },
+      { "parent": "97", "name": "195" },
+      { "parent": "97", "name": "196" },
+      { "parent": "98", "name": "197" },
+      { "parent": "98", "name": "198" },
+      { "parent": "99", "name": "199" },
+      { "parent": "99", "name": "200" },
+      { "parent": "100", "name": "201" },
+      { "parent": "100", "name": "202" },
+      { "parent": "101", "name": "203" },
+      { "parent": "101", "name": "204" },
+      { "parent": "102", "name": "205" },
+      { "parent": "102", "name": "206" },
+      { "parent": "103", "name": "207" },
+      { "parent": "103", "name": "208" },
+      { "parent": "104", "name": "209" },
+      { "parent": "104", "name": "210" },
+      { "parent": "105", "name": "211" },
+      { "parent": "105", "name": "212" },
+      { "parent": "106", "name": "213" },
+      { "parent": "106", "name": "214" },
+      { "parent": "107", "name": "215" },
+      { "parent": "107", "name": "216" },
+      { "parent": "108", "name": "217" },
+      { "parent": "108", "name": "218" },
+      { "parent": "109", "name": "219" },
+      { "parent": "109", "name": "220" },
+      { "parent": "110", "name": "221" },
+      { "parent": "110", "name": "222" },
+      { "parent": "111", "name": "223" },
+      { "parent": "111", "name": "224" },
+      { "parent": "112", "name": "225" },
+      { "parent": "112", "name": "226" },
+      { "parent": "113", "name": "227" },
+      { "parent": "113", "name": "228" },
+      { "parent": "114", "name": "229" },
+      { "parent": "114", "name": "230" },
+      { "parent": "115", "name": "231" },
+      { "parent": "115", "name": "232" },
+      { "parent": "116", "name": "233" },
+      { "parent": "116", "name": "234" },
+      { "parent": "117", "name": "235" },
+      { "parent": "117", "name": "236" },
+      { "parent": "118", "name": "237" },
+      { "parent": "118", "name": "238" },
+      { "parent": "119", "name": "239" },
+      { "parent": "119", "name": "240" },
+      { "parent": "120", "name": "241" },
+      { "parent": "120", "name": "242" },
+      { "parent": "121", "name": "243" },
+      { "parent": "121", "name": "244" },
+      { "parent": "122", "name": "245" },
+      { "parent": "122", "name": "246" },
+      { "parent": "123", "name": "247" },
+      { "parent": "123", "name": "248" },
+      { "parent": "124", "name": "249" },
+      { "parent": "124", "name": "250" },
+      { "parent": "125", "name": "251" },
+      { "parent": "125", "name": "252" },
+      { "parent": "126", "name": "253" },
+      { "parent": "126", "name": "254" },
+    ]
+
+    // set the dimensions and margins of the diagram
+    var margin = { top: 40, right: 90, bottom: 50, left: 90 },
+      width = 500 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+    // declares a tree layout and assigns the size
+    var tree = d3.tree()
+      .size([width, height]);
+
+    //  assigns the data to a hierarchy using parent-child relationships
+    var dataMap = data.reduce(function (map, node) {
+      map[node.name] = node;
+      return map;
+    }, {});
+
+    // create the tree array
+    var treeData = [];
+    data.forEach(function (node) {
+      // add to parent
+      var parent = dataMap[node.parent];
+      if (parent) {
+        // create child array if it doesn't exist
+        (parent.children || (parent.children = []))
+          // add node to child array
+          .push(node);
+
+      } else {
+        // parent is null or missing
+        treeData.push(node);
+      }
+    });
+
+
+    function compute_structure(v) {
+      if (!v.children) return
+      if (v.children.length == 2) {
+        v.children.forEach(c => {
+          var child_id = parseInt(c.data.name) % 2;
+          c.angle = (child_id) ? v.angle + v.delta_angle: v.angle - v.delta_angle
+          c.delta_angle = v.delta_angle
+          c.path_len = v.path_len * 0.65
+          c.x = v.x + v.path_len * Math.sin(c.angle)
+          c.y = v.y + v.path_len * Math.cos(c.angle)
+        })
+      } else {
+        v.children[0].angle = 0;
+        v.children[0].delta_angle = v.delta_angle;
+        v.children[0].path_len = v.path_len;
+        v.children[0].x = v.x;
+        v.children[0].y = v.y + v.path_len + 20;
+      }
+    }
+
+    function expanding_tree_hierarchy(root, position) {
+      root.x = position.x;
+      root.y = position.y;
+      root.delta_angle = position.delta_angle;
+      root.angle = 0.0;
+      root.path_len = position.path_len;
+      root.eachBefore(compute_structure);
+      return root;
+    }
+
+    var interval = 200;
+    var init_data = d3.hierarchy(treeData[0]);
+
+    function draw(angle, delta_angle) {
+      var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom),
+        g = svg.append("g")
+          .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+      nodes = expanding_tree_hierarchy(init_data, {
+        x: 150.0,
+        y: 50.0,
+        angle: angle,
+        delta_angle: delta_angle,
+        path_len: 75
+      });
+
+      // maps the node data to the tree layout
+      // nodes = tree(nodes);
+      // console.log(nodes);
+      // 
+      // append the svg obgect to the body of the page
+      // appends a 'group' element to 'svg'
+      // moves the 'group' element to the top left margin
+      // adds the links between the nodes
+      var link = g.selectAll(".link")
+        .data(nodes.descendants().slice(1))
+        .enter().append("path")
+        .attr("class", "link")
+        .attr("d", function (d) {
+          return "M" + d.x + "," + (height - d.y)
+            + "L" + d.parent.x + "," + (height - d.parent.y);
+        })
+        .attr("stroke-width", 1.5)
+        .attr("stroke", "url(#linear-gradient)")
+        .attr("fill", "#cc");
+    }
+
+    var theta = 0.0;
+    setInterval(function () {
+      theta += 0.1;
+      d3.select("svg").remove();
+      draw(theta, theta);
+    }, 200);
+
+  </script>
+</body>
